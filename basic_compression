@@ -1,7 +1,9 @@
-# frozen_string_literal: true
+#!/usr/bin/ruby
 
 class BasicCompression
   def build_compressed_string(input_str)
+    raise(ArgumentError, "Input must be of type 'String'") unless input_str.class == String
+
     output = ''
     pointer = 0
 
@@ -17,6 +19,8 @@ class BasicCompression
     output
   end
 
+  private
+
   def read_string_sequence(repeating_string)
     count = 1
 
@@ -26,8 +30,14 @@ class BasicCompression
 end
 
 # Simple test sequences, uncomment to run
-basic = BasicCompression.new
-p basic.build_compressed_string('abcdefg') == 'abcdefg'
-p basic.build_compressed_string('abbcccdddd') == 'ab2c3d4'
-p basic.build_compressed_string('abcaaabbb') == 'abca3b3'
-p basic.build_compressed_string('aaabaaaaccaaaaba') == 'a3ba4c2a4ba'
+# basic = BasicCompression.new
+# p basic.build_compressed_string('abcdefg') == 'abcdefg'
+# p basic.build_compressed_string('abbcccdddd') == 'ab2c3d4'
+# p basic.build_compressed_string('abcaaabbb') == 'abca3b3'
+# p basic.build_compressed_string('aaabaaaaccaaaaba') == 'a3ba4c2a4ba'
+
+begin
+  p BasicCompression.new.build_compressed_string(ARGV[0])
+rescue ArgumentError => e
+  p e.message
+end

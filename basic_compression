@@ -3,6 +3,7 @@
 class BasicCompression
   def build_compressed_string(input_str)
     raise(ArgumentError, "Input must be of type 'String'") unless input_str.class == String
+    raise(ArgumentError, "Input must consist of only lower case letters") if input_str =~ /[^a-z]/
 
     output = ''
     pointer = 0
